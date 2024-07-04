@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require("path");
 var fs = require("fs");
 const multer = require("multer");
-var db = require("./db");
+//var db = require("./db");
 const sftpLib = require("./sftp");
 const config = require("../config");
 const swaggerUi = require('swagger-ui-express');
@@ -46,7 +46,7 @@ router.post("/getfiles", upload.none(), function (req, res) {
   }
 
   const { deviceId} = req.body;
-  db.query("SELECT * FROM `employees` WHERE `deviceId` = ?",[deviceId], function (err, result) {
+  /*db.query("SELECT * FROM `employees` WHERE `deviceId` = ?",[deviceId], function (err, result) {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     }
@@ -66,7 +66,7 @@ router.post("/getfiles", upload.none(), function (req, res) {
         }
       });
     }
-  });
+  });*/
 });
 
 router.post("/uploader", upload.single("image"), function (req, res) {
@@ -84,7 +84,7 @@ router.post("/uploader", upload.single("image"), function (req, res) {
     return res.status(400).json({ message: "Not allowed only png jpg jpeg are allowed to upload" });
   }
   const { deviceId} = req.body;
-  db.query("SELECT * FROM `employees` WHERE `deviceId` = ?",[deviceId], function (err, result) {
+  /*db.query("SELECT * FROM `employees` WHERE `deviceId` = ?",[deviceId], function (err, result) {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     }
@@ -105,7 +105,7 @@ router.post("/uploader", upload.single("image"), function (req, res) {
         return res.status(200).json({ message: "File Uploaded" });
       });
     }
-  });
+  });*/
 });
 
 module.exports = router;
