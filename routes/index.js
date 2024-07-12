@@ -44,7 +44,7 @@ router.get("/getfiles", function (req, res) {
   });
 });
 
-router.post("/uploader", upload.single("image"), function (req, res) {
+router.post("/report/incident", upload.single("image"), function (req, res) {
   if (req.headers.apikey !== config.validUUID) {
     return res.status(403).json({ message: "Provide Valid Apikey" });
   }
