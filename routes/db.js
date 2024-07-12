@@ -1,14 +1,20 @@
 const mysql = require('mysql2');
 const config = require('../config');
 
-const connection = mysql.createConnection(config.db);
+exports.getConnection=function(cb){
+  const db = mysql.createConnection (config.db);
+    // connect to database
+  db.connect((err) => {
+      if (err) {
+          throw err;
+      }
+      console.log('Connected to database');
+  });
+  cb(null,db);
+}
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    process.exit(1);
-  }
-  console.log('Connected to MySQL');
-});
+exports.release=function(connection,cb){
+    connection.end();
+    cb();
+}
 
-module.exports = connection;
